@@ -1,5 +1,5 @@
-import QtQuick 2.11
-import QtQuick.Window 2.11
+import QtQuick 2.5
+import QtQuick.Window 2.2
 import QtQuick.Controls 1.4
 import QtQuick.Controls.Styles 1.4
 
@@ -7,25 +7,20 @@ Window {
     id: window
     visible: true
     width: 640
-    height: 480
+    height: 490
     title: qsTr("Hello World")
 
     Column {
         id: column
-        anchors.top: parent.top
-        anchors.topMargin: 10
-        anchors.right: parent.right
-        anchors.left: parent.left
-        anchors.rightMargin: 10
-        anchors.leftMargin: 10
-        anchors.bottomMargin: 10
-        anchors.bottom: parent.bottom
+        anchors.fill: parent
+        anchors.margins: 10
         spacing: 10
 
         Repeater{
             id: repeater
             model: ["Title","Type","Authors","Info"]
             property double myHeight: 0
+            property double maxText: 1
             Row {
                 id: row
                 spacing: 10
@@ -45,53 +40,53 @@ Window {
                 TextField {
                     id: textField
                     height: 25
-                    width: parent.width-text1.width - row.spacing
+                    width: parent.width - x
                 }
             }
-            Component.onCompleted: {
-                for (var i = 0; i< repeater.count; i++){
-                    repeater.myHeight+= repeater.itemAt(i).height + column.spacing
-                }
-                repeater.myHeight+=  column.spacing
-                console.log(repeater.myHeight)
+        onItemAdded: {
+            maxText = Math.max(maxText,repeater.itemAt(index).children[0].width)
+            for( var i=0; i<repeater.count; i++)
+            {
+                repeater.itemAt(i).children[0].width = maxText
             }
+            console.log(repeater.itemAt(index).children[0].width)
         }
-
-        Column {
-            id: column1
-            spacing: 5
+        }
+        Item {
+            id: test
+            width: 1
+            height: 5
+        }
+        TextArea{
+            id:textAr
             width: parent.width
-            height: parent.height- repeater.myHeight - button.height
-            Text {
-                id: text2
-                text: qsTr("Comments:")
-                font.pixelSize: 12
+            height: parent.height - y - button.height - column.spacing
+            wrapMode: Text.WordWrap
+
+            style: TextAreaStyle {
+                transientScrollBars: true
+                scrollToClickedPosition: true
+                selectionColor: "#fff"
+                selectedTextColor: "#000"
             }
 
-            TextArea {
-                id: textArea
-                height: parent.height - text2.height - column1.spacing
-                width: parent.width
 
-                style: TextAreaStyle { backgroundColor : "yellow"}
-            }
-
-            Component.onCompleted: {
-                console.log("Hello"+ height)
+            Text{
+                id: title
+                text:"Comments:"
+                anchors.bottom: parent.top
+                anchors.bottomMargin: 5
             }
         }
-        Button {
-            id: button
-            width: 90
-            text: qsTr("Save")
-            anchors.right: column1.right
-        }
-
-
-
-
 
     }
 
-
+    Button {
+        id: button
+        text: qsTr("Save")
+        anchors.bottom: parent.bottom
+        anchors.bottomMargin: 10
+        anchors.right: parent.right
+        anchors.rightMargin: 10
+    }
 }
