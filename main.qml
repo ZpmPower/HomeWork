@@ -27,7 +27,7 @@ Window {
 
             ListElement {
                 label: "Password"
-                isErrorSupport: false
+                isErrorSupport: true
             }
 
             ListElement {
@@ -124,23 +124,65 @@ Window {
             text: "Save"
 
             onClicked: {
-                for(var i = 0;i < myModel.count; i++)
-                {
-                    var modelItem = myModel.get(i);
-                    if(modelItem.isErrorSupport)
-                    {
-                        var loader = fieldsrep.itemAt(i);
-                        loader.item.error = "%1 can't be empty !!!".arg(textrep.itemAt(i).text)
-                        if(loader.item.fieldLength == 0)
-                        {
-                            loader.item.state == "normal" ? loader.item.state = "error" : loader.item.state = "normal"
-                        }
-                        else loader.item.error = ""
+//                for(var i = 0;i < myModel.count; i++)
+//                {
+//                    var modelItem = myModel.get(i);
+//                    if(modelItem.isErrorSupport)
+//                    {
+//                        var loader = fieldsrep.itemAt(i);
+//                        switch(modelItem.label)
+//                        {
+//                            case "Login":
+
+//                                if(loader.item.fieldLength > 0 && loader.item.fieldLength < 4)
+//                                {
+//                                    loader.item.error = "%1 is busy !!!".arg(modelItem.label)
+//                                    loader.item.state = "busyLogin"
+
+//                                }
+//                                if(loader.item.fieldLength >= 4)
+//                                {
+//                                    loader.item.error = "%1 is new !!!".arg(modelItem.label)
+//                                    loader.item.state = "newLogin"
+
+//                                }
+
+//                                break;
+
+//                            case "Password":
+
+//                                if(loader.item.fieldLength > 0 && loader.item.fieldLength < 8)
+//                                {
+//                                    loader.item.error = "%1 is unsafe".arg(modelItem.label)
+//                                    loader.item.state = "unsafePassword"
+
+//                                }
+//                                if(loader.item.fieldLength >= 8  && loader.item.fieldLength < 12)
+//                                {
+//                                    loader.item.error = "%1 is norm".arg(modelItem.label)
+//                                    loader.item.state = "normPassword"
+
+//                                }
+//                                if(loader.item.fieldLength >= 12)
+//                                {
+//                                    loader.item.error = "%1 is safe".arg(modelItem.label)
+//                                    loader.item.state = "safePassword"
+
+//                                }
+//                                break;
+
+//                        }
+
+////                        if(loader.item.fieldLength == 0)
+////                        {
+////                            loader.item.state == "normal" ? loader.item.state = "error" : loader.item.state = "normal"
+////                        }
+////                        else loader.item.error = ""
 
 
-                    }
-                    console.log(loader.item.text)
-                }
+//                    }
+//                    console.log(loader.item.text)
+//                }
             }
         }
 
