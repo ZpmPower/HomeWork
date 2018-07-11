@@ -27,7 +27,7 @@ ColumnLayout {
                     switch(modelItem.label)
                     {
                         case "Login":
-                            //console.log("log")
+                            if(length == 0) error = ""
                             if(length > 0 && length < 4)
                             {
                                 error = "%1 is busy !!!".arg(modelItem.label)
@@ -40,11 +40,10 @@ ColumnLayout {
                                 root.state = "newLogin"
 
                             }
-                            break;
+                            break
 
                         case "Password":
-
-                            //console.log("pass")
+                            if(length == 0) error = ""
                             if(length > 0 && length < 8)
                             {
                                 error = "%1 is unsafe".arg(modelItem.label)
@@ -63,7 +62,7 @@ ColumnLayout {
                                 root.state = "safePassword"
 
                             }
-                            break;
+                            break
                     }
                 }
             }
