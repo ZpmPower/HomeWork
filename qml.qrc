@@ -1,0 +1,17 @@
+<RCC>
+    <qresource prefix="/">
+        <file>main.qml</file>
+        <file>AsyncImageProvider.cpp</file>
+        <file>AsyncImageProvider.h</file>
+        <file>main.cpp</file>
+        <file>RandomImageProvider.cpp</file>
+        <file>RandomImageProvider.h</file>
+        <file>images/7up</file>
+        <file>images/Coca-Cola</file>
+        <file>images/Fanta</file>
+        <file>images/Mirinda</file>
+        <file>images/Pepsi</file>
+        <file>images/Shweps</file>
+        <file>images/Sprite</file>
+    </qresource>
+</RCC>
