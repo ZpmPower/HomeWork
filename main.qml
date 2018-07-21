@@ -97,6 +97,7 @@ Window {
                     anchors.top: parent.top
                     anchors.bottomMargin: 0
                     focus: true
+                    clip: true
 
                     model: myModel
                     cellWidth: 120
