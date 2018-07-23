@@ -1,8 +1,8 @@
-#include "MyListModel.h"
+#include "MySmileysModel.h"
 #include <qdebug.h>
 #include <string>
 
-MyListModel::MyListModel(QObject *parent)
+MySmileysModel::MySmileysModel(QObject *parent)
     : QAbstractListModel(parent)
 {
     QList<QByteArray> bytes;
@@ -21,12 +21,12 @@ MyListModel::MyListModel(QObject *parent)
     }
 }
 
-QVariant MyListModel::headerData(int section, Qt::Orientation orientation, int role) const
+QVariant MySmileysModel::headerData(int section, Qt::Orientation orientation, int role) const
 {
     // FIXME: Implement me!
 }
 
-int MyListModel::rowCount(const QModelIndex &parent) const
+int MySmileysModel::rowCount(const QModelIndex &parent) const
 {
     // For list models only the root node (an invalid parent) should return the list's size. For all
     // other (valid) parents, rowCount() should return 0 so that it does not become a tree model.
@@ -37,7 +37,7 @@ int MyListModel::rowCount(const QModelIndex &parent) const
     return m_data.size();
 }
 
-QVariant MyListModel::data(const QModelIndex &index, int role) const
+QVariant MySmileysModel::data(const QModelIndex &index, int role) const
 {
     if (!index.isValid())
         return QVariant();
@@ -55,7 +55,7 @@ QVariant MyListModel::data(const QModelIndex &index, int role) const
     return QVariant();
 }
 
-QHash<int, QByteArray> MyListModel::roleNames() const
+QHash<int, QByteArray> MySmileysModel::roleNames() const
 {
     QHash<int, QByteArray> roles = QAbstractListModel::roleNames();
     roles[NameRole] = "mName";

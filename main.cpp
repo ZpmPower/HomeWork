@@ -1,7 +1,7 @@
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
 
-#include <MyListModel.h>
+#include <MySmileysModel.h>
 #include <MyAnimalModel.h>
 #include <QQmlContext>
 
@@ -12,7 +12,7 @@ int main(int argc, char *argv[])
     QGuiApplication app(argc, argv);
 
 
-     qmlRegisterType<MyListModel>("MyListModel", 1, 0, "MyListModel");
+     qmlRegisterType<MySmileysModel>("MySmileysModel", 1, 0, "MySmileysModel");
      qmlRegisterType<MyAnimalModel>("MyAnimalModel", 1, 0, "MyAnimalModel");
 
     QQmlApplicationEngine engine;

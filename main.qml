@@ -5,7 +5,7 @@ import QtQuick.Layouts 1.3
 import QtQuick.Controls 1.4
 import QtQuick.Controls 2.2 as QQ2
 
-import MyListModel 1.0
+import MySmileysModel 1.0
 import MyAnimalModel 1.0
 
 Window {
@@ -47,15 +47,28 @@ Window {
                     id: listView
                     anchors.fill: parent
                     anchors.margins: 5
-                    //clip: true
-                    //flickableDirection: Flickable.VerticalFlick
                     model: ListModel
                     {id: messageModel}
+                    clip: true
+                    spacing: 5
                     delegate: Item {
-                        width: 180; height: 40
+                        id: itemMessage
+                        width: parent.width; height: dateMsg.height+messText.height
                         Column {
-                            Text { text: '<b>Message:</b> ' + name; wrapMode:Text.WordWrap }
-                            Text { text: date }
+                            id: messageLine
+                            Text {
+                                id: messText
+                                text: '<b>Message:</b> ' + name
+                                wrapMode: Text.WordWrap
+                                width: itemMessage.width
+                                onTextChanged:
+                                {
+                                console.log(width)
+                                console.log(listView.width)
+                                }
+
+                            }
+                            Text { id: dateMsg; text: date }
                         }
                     }
                     QQ2.ScrollBar.vertical: QQ2.ScrollBar {}
@@ -96,8 +109,11 @@ Window {
 
                     onClicked:
                     {
-                       messageModel.append({name: textField.text, date: Qt.formatDateTime(new Date(), "hh:mm dd.MM.yy")})
-                       textField.text=""
+                       if(textField.length)
+                       {
+                          messageModel.append({name: textField.text, date: Qt.formatDateTime(new Date(), "hh:mm dd.MM.yy")})
+                          textField.text=""
+                       }
                     }
                 }
 
@@ -110,8 +126,6 @@ Window {
                 anchors.right: parent.right
                 anchors.bottom: parent.bottom
                 anchors.margins: 5
-
-
 
                 Tab {
                     title: qsTr("Smileys")
@@ -126,7 +140,7 @@ Window {
                         highlight: Rectangle { color: "lightsteelblue"; radius: 5 }
                         focus: true
 
-                        model: MyListModel {}
+                        model: MySmileysModel {}
 
                         delegate: Item {
                             id: gridItem

@@ -1,9 +1,9 @@
-#ifndef MYLISTMODEL_H
-#define MYLISTMODEL_H
+#ifndef MYSMILEYSMODEL_H
+#define MYSMILEYSMODEL_H
 
 #include <QAbstractListModel>
 
-class MyListModel : public QAbstractListModel
+class MySmileysModel : public QAbstractListModel
 {
     Q_OBJECT
 
@@ -14,7 +14,7 @@ public:
         IconRole
     };
 
-    explicit MyListModel(QObject *parent = nullptr);
+    explicit MySmileysModel(QObject *parent = nullptr);
 
     // Header:
     QVariant headerData(int section, Qt::Orientation orientation, int role = Qt::DisplayRole) const override;
@@ -30,4 +30,4 @@ private:
     QList<QString> m_data;
 };
 
-#endif // MYLISTMODEL_H
+#endif // MYSMILEYSMODEL_H

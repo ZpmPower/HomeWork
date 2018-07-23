@@ -16,8 +16,8 @@ RC_FILE = myapp.rc
 
 SOURCES += \
         main.cpp \
-    MyListModel.cpp \
-    MyAnimalModel.cpp
+    MyAnimalModel.cpp \
+    MySmileysModel.cpp
 
 RESOURCES += qml.qrc
 
@@ -33,8 +33,8 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
 HEADERS += \
-    MyListModel.h \
-    MyAnimalModel.h
+    MyAnimalModel.h \
+    MySmileysModel.h
 
 DISTFILES += \
     message.png
