@@ -1,31 +1,25 @@
-#include "MyAnimalModel.h"
+#include "MyEmojiesModel.h"
 #include <QDebug>
+#include "Helper.h"
 
-MyAnimalModel::MyAnimalModel(QObject *parent)
+MyEmojiesModel::MyEmojiesModel(std::string emojies, QObject *parent)
     : QAbstractListModel(parent)
 {
     QList<QByteArray> bytes;
-    std::string emojies = "🐶🐱🐭🐹🐰🦊🐻🐼🐨🐯🦁🐮🐷🐽🐸🐵🙈🙉🙊🐒🐔🐧🐦🐤🐣🐥🦆🦅🦉🦇🐺🐗🐴🦄🐝🐛🦋🐌🐚🐞🐜🕷🕸🦂🐢🐍🦎🐙🦑🦐🦀🐡🐠🐟🐬🐳🐋🦈🐊🐅🐆🦍🐘🦏🐪🐫🐃🐂🐄🐎🐖🐏🐑🐐🦌🐕🐩🐈🐓🦃🕊🐇🐁🐀🐿";
-    for(size_t i=0; i< emojies.size(); i+=4)
-    {
-        std::string tmp;
-        tmp+= emojies.substr(i,4);
-        bytes << QByteArray(tmp.c_str());
-    }
+    Helper::getBytesArray(bytes,emojies);
     foreach (QByteArray binary, bytes)
     {
         QString str = QString::fromUtf8(binary);
-
         m_data.append(str);
     }
 }
 
-QVariant MyAnimalModel::headerData(int section, Qt::Orientation orientation, int role) const
+QVariant MyEmojiesModel::headerData(int section, Qt::Orientation orientation, int role) const
 {
     // FIXME: Implement me!
 }
 
-int MyAnimalModel::rowCount(const QModelIndex &parent) const
+int MyEmojiesModel::rowCount(const QModelIndex &parent) const
 {
     // For list models only the root node (an invalid parent) should return the list's size. For all
     // other (valid) parents, rowCount() should return 0 so that it does not become a tree model.
@@ -36,7 +30,7 @@ int MyAnimalModel::rowCount(const QModelIndex &parent) const
     return m_data.size();
 }
 
-QVariant MyAnimalModel::data(const QModelIndex &index, int role) const
+QVariant MyEmojiesModel::data(const QModelIndex &index, int role) const
 {
     if (!index.isValid())
         return QVariant();
@@ -54,7 +48,7 @@ QVariant MyAnimalModel::data(const QModelIndex &index, int role) const
     return QVariant();
 }
 
-QHash<int, QByteArray> MyAnimalModel::roleNames() const
+QHash<int, QByteArray> MyEmojiesModel::roleNames() const
 {
     QHash<int, QByteArray> roles = QAbstractListModel::roleNames();
     roles[NameRole] = "mName";

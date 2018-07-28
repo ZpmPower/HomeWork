@@ -16,8 +16,11 @@ RC_FILE = myapp.rc
 
 SOURCES += \
         main.cpp \
-    MyAnimalModel.cpp \
-    MySmileysModel.cpp
+    EmojiController.cpp \
+    Helper.cpp \
+    MyEmojiesModel.cpp \
+    QClipboardProxy.cpp \
+    EmojiModels.cpp
 
 RESOURCES += qml.qrc
 
@@ -33,8 +36,11 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
 HEADERS += \
-    MyAnimalModel.h \
-    MySmileysModel.h
+    EmojiController.h \
+    Helper.h \
+    MyEmojiesModel.h \
+    QClipboardProxy.h \
+    EmojiModels.h
 
 DISTFILES += \
     message.png

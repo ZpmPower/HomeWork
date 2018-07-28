@@ -1,9 +1,9 @@
-#ifndef MYANIMALMODEL_H
-#define MYANIMALMODEL_H
+#ifndef MYEMOJIESMODEL_H
+#define MYEMOJIESMODEL_H
 
 #include <QAbstractListModel>
 
-class MyAnimalModel : public QAbstractListModel
+class MyEmojiesModel : public QAbstractListModel
 {
     Q_OBJECT
 
@@ -13,7 +13,7 @@ public:
         NameRole = Qt::UserRole + 1,
         IconRole
     };
-    explicit MyAnimalModel(QObject *parent = nullptr);
+    explicit MyEmojiesModel(std::string emojies, QObject *parent = nullptr);
 
     // Header:
     QVariant headerData(int section, Qt::Orientation orientation, int role = Qt::DisplayRole) const override;
@@ -28,4 +28,4 @@ private:
     QList<QString> m_data;
 };
 
-#endif // MYANIMALMODEL_H
+#endif // MYEMOJIESMODEL_H
