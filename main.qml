@@ -9,6 +9,8 @@ import QtQuick.Dialogs 1.3
 import QtTest 1.0
 import Clipboard 1.0
 
+//import EmojiModels 1.0
+
 Window {
     id: window
     visible: true
@@ -36,7 +38,6 @@ Window {
             focus: true
             Keys.onEscapePressed: {
               window.close()
-              //event.accepted = true;
             }
         }
 
@@ -385,7 +386,7 @@ Window {
                         highlight: Rectangle { color: "lightsteelblue"; radius: 5 }
                         focus: true
 
-                        model: emojiAnimalModel
+                        model: models.getModel(1)//emojiAnimalModel
 
                         delegate: Item {
                             id: gridItemAnimals

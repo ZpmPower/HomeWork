@@ -6,6 +6,7 @@
 #include "QClipboardProxy.h"
 
 #include "EmojiController.h"
+#include "EmojiModels.h"
 
 int main(int argc, char *argv[])
 {
@@ -16,6 +17,8 @@ int main(int argc, char *argv[])
     qmlRegisterType<QClipboardProxy>("Clipboard", 1, 0, "Clipboard");
 
     QQmlApplicationEngine engine;
+
+    EmojiModels *modelsPtr = new EmojiModels();
 
     EmojiController emojiController;
 
@@ -30,6 +33,11 @@ int main(int argc, char *argv[])
 
     engine.rootContext()->setContextProperty("emojiAnimalModel",emojiesAnimalPtr);
     engine.rootContext()->setContextProperty("emojiSmileysModel",smileysPtr);
+
+    QQmlEngine::setObjectOwnership(modelsPtr, QQmlEngine::JavaScriptOwnership);
+    engine.rootContext()->setContextProperty("models",QVariant::fromValue(modelsPtr));
+
+
 
     engine.load(QUrl(QStringLiteral("qrc:/main.qml")));
     if (engine.rootObjects().isEmpty())
