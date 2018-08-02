@@ -4,9 +4,11 @@
 #include <MyEmojiesModel.h>
 #include <QQmlContext>
 #include "QClipboardProxy.h"
+#include <QQmlComponent>
 
 #include "EmojiController.h"
 #include "EmojiModels.h"
+#include "Languages.h"
 
 int main(int argc, char *argv[])
 {
@@ -15,31 +17,18 @@ int main(int argc, char *argv[])
     QGuiApplication app(argc, argv);
 
     qmlRegisterType<QClipboardProxy>("Clipboard", 1, 0, "Clipboard");
+    qmlRegisterType<EmojiModels>("EmojiModels",1,0, "EmojiModels");
 
     QQmlApplicationEngine engine;
 
-    EmojiModels *modelsPtr = new EmojiModels();
+    Languages *ptrData = new Languages();
 
-    EmojiController emojiController;
+    QQmlEngine::setObjectOwnership(ptrData, QQmlEngine::JavaScriptOwnership);
 
-    std::string smileys = emojiController.getEmojies(EmojiTypes::SMILES);
-    std::string animals = emojiController.getEmojies(EmojiTypes::ANIMALS);
-
-    MyEmojiesModel *smileysPtr = new MyEmojiesModel(smileys);
-    MyEmojiesModel *emojiesAnimalPtr = new MyEmojiesModel(animals);
-
-    QQmlEngine::setObjectOwnership(emojiesAnimalPtr, QQmlEngine::JavaScriptOwnership);
-    QQmlEngine::setObjectOwnership(smileysPtr, QQmlEngine::JavaScriptOwnership);
-
-    engine.rootContext()->setContextProperty("emojiAnimalModel",emojiesAnimalPtr);
-    engine.rootContext()->setContextProperty("emojiSmileysModel",smileysPtr);
-
-    QQmlEngine::setObjectOwnership(modelsPtr, QQmlEngine::JavaScriptOwnership);
-    engine.rootContext()->setContextProperty("models",QVariant::fromValue(modelsPtr));
-
-
+    engine.rootContext()->setContextProperty("Language", ptrData);
 
     engine.load(QUrl(QStringLiteral("qrc:/main.qml")));
+
     if (engine.rootObjects().isEmpty())
         return -1;
 

@@ -3,6 +3,8 @@
 
 #include <QAbstractListModel>
 
+Q_DECLARE_METATYPE(std::string)
+
 class MyEmojiesModel : public QAbstractListModel
 {
     Q_OBJECT
@@ -12,13 +14,9 @@ public:
         NameRole = Qt::UserRole + 1,
         IconRole
     };
-    explicit MyEmojiesModel(std::string emojies, QObject *parent = nullptr);
-    explicit MyEmojiesModel(const MyEmojiesModel &obj){
-        m_data = obj.m_data;
-    }
-    bool operator==(const MyEmojiesModel &rhs) const {
-            return rhs.m_data == m_data;
-        }
+    Q_INVOKABLE QString getName() { return m_name;}
+    explicit MyEmojiesModel(QList<QByteArray> emojiBytes, QString name, QObject *parent = nullptr);
+
 
     // Header:
     QVariant headerData(int section, Qt::Orientation orientation, int role = Qt::DisplayRole) const override;
@@ -29,8 +27,12 @@ public:
     QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const override;
 
     QHash<int, QByteArray> roleNames() const;
+
+
+
 private:
     QList<QString> m_data;
+    QString m_name;
 };
 
 #endif // MYEMOJIESMODEL_H

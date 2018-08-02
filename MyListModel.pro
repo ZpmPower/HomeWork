@@ -20,7 +20,8 @@ SOURCES += \
     Helper.cpp \
     MyEmojiesModel.cpp \
     QClipboardProxy.cpp \
-    EmojiModels.cpp
+    EmojiModels.cpp \
+    Languages.cpp
 
 RESOURCES += qml.qrc
 
@@ -40,7 +41,8 @@ HEADERS += \
     Helper.h \
     MyEmojiesModel.h \
     QClipboardProxy.h \
-    EmojiModels.h
+    EmojiModels.h \
+    Languages.h
 
 DISTFILES += \
     message.png

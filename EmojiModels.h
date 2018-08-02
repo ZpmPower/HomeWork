@@ -15,7 +15,8 @@ public:
 
     enum Roles {
         ModelRole = Qt::UserRole + 1,
-        IconRole
+        IconRole,
+        NameRole
     };
 
     // Header:

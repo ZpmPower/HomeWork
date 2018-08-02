@@ -1,12 +1,13 @@
 #include "EmojiModels.h"
+#include <QDebug>
 
 EmojiModels::EmojiModels(QObject *parent)
     : QAbstractListModel(parent)
 {
     for (int i=0; i< static_cast<int>(EmojiTypes::SIZE); i++)
     {
-        std::string emojiStr = controller.getEmojies(static_cast<EmojiTypes>(i));
-        m_models.append(new MyEmojiesModel(emojiStr));
+        std::pair<QList<QByteArray>, QString> pair = controller.getEmojies(static_cast<EmojiTypes>(i));
+        m_models.append(new MyEmojiesModel(pair.first,pair.second));
     }
 }
 
@@ -32,32 +33,35 @@ QVariant EmojiModels::data(const QModelIndex &index, int role) const
         return QVariant();
 
     // FIXME: Implement me!
-//    switch (role) {
-//    case ModelRole:
-//        return m_models.at(index.row());
-//        break;
-//    default:
-//        break;
-//    }
-//    return QVariant();
+    switch (role) {
+    case ModelRole:
+        return QVariant::fromValue(m_models.at(index.row()));
+        break;
+    case NameRole:
+        return QVariant::fromValue(m_models.at(index.row())->getName());
+    default:
+        break;
+    }
+    return QVariant();
     int i = index.row();
-    if (i < 0 || i >= m_models.size())
-        return QVariant(QVariant::Invalid);
+//    if (i < 0 || i >= m_models.size())
+//        return QVariant(QVariant::Invalid);
 
-    return QVariant::fromValue(m_models[i]);
+//    return QVariant::fromValue(m_models[i]);
 }
 
 QHash<int, QByteArray> EmojiModels::roleNames() const
 {
     QHash<int, QByteArray> roles = QAbstractListModel::roleNames();
     roles[ModelRole] = "mModel";
+    roles[NameRole] = "mName";
     return roles;
 }
 
-MyEmojiesModel *EmojiModels::model(int idx)
+MyEmojiesModel* EmojiModels::model(int idx)
 {
-//    if (idx < 0 || idx >= m_models.size())
-//        return nullptr;
+    if (idx < 0 || idx >= m_models.size())
+        return nullptr;
 
-//    return m_models[idx];
+    return m_models[idx];
 }

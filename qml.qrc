@@ -1,7 +1,12 @@
 <RCC>
     <qresource prefix="/">
         <file>main.qml</file>
-        <file>smile.png</file>
-        <file>imageIcon.png</file>
+        <file>MySetting.qml</file>
+        <file>send.mp3</file>
+        <file>images/gear.png</file>
+        <file>images/imageIcon.png</file>
+        <file>images/novolume.png</file>
+        <file>images/smile.png</file>
+        <file>images/volume.png</file>
     </qresource>
 </RCC>

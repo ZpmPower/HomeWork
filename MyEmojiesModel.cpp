@@ -2,16 +2,16 @@
 #include <QDebug>
 #include "Helper.h"
 
-MyEmojiesModel::MyEmojiesModel(std::string emojies, QObject *parent)
+
+MyEmojiesModel::MyEmojiesModel(QList<QByteArray> emojiBytes, QString name,QObject *parent)
     : QAbstractListModel(parent)
 {
-    QList<QByteArray> bytes;
-    Helper::getBytesArray(bytes,emojies);
-    foreach (QByteArray binary, bytes)
+    foreach (QByteArray binary, emojiBytes)
     {
         QString str = QString::fromUtf8(binary);
         m_data.append(str);
     }
+    if(!name.isEmpty()) m_name = name;
 }
 
 QVariant MyEmojiesModel::headerData(int section, Qt::Orientation orientation, int role) const
@@ -38,6 +38,7 @@ QVariant MyEmojiesModel::data(const QModelIndex &index, int role) const
     // FIXME: Implement me!
     switch (role) {
     case NameRole:
+        return m_name;
         break;
     case IconRole:
         return m_data.at(index.row());
