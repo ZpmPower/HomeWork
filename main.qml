@@ -191,6 +191,10 @@ Window {
                             id: messageModel
                         }
                         highlight: Rectangle { color: "#ffedcc"; radius: 5 }
+
+                        flickableDirection: Flickable.VerticalFlick
+                        QQ2.ScrollBar.vertical: QQ2.ScrollBar {}
+
                         clip: true
                         focus: true
                         spacing: 5
@@ -252,7 +256,6 @@ Window {
                                     Text { id: dateMsg; text: date }
                                 }
                             }
-                            QQ2.ScrollBar.vertical: QQ2.ScrollBar {}
                         }
                     }
                 }
