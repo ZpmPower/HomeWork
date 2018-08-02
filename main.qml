@@ -10,6 +10,7 @@ import QtQuick.Controls.Styles 1.4
 import QtTest 1.0
 import Clipboard 1.0
 import QtMultimedia 5.8
+import QtQml 2.2
 
 import EmojiModels 1.0
 
@@ -82,6 +83,7 @@ Window {
                 }
                 onClicked: {
                     secondWindow.open(currentTextColor, currentTextSize)
+                    windowRectangle.enabled = false
                     rotationAnimation.running = true
 
                 }
@@ -285,6 +287,10 @@ Window {
                             anchors.fill: parent
                             anchors.margins: 3
                             wrapMode: TextEdit.Wrap
+
+                            Keys.onReturnPressed: {
+                               sendBtn.clicked()
+                            }
                         }
 
                     }
@@ -534,6 +540,7 @@ Window {
             }
             onClosing: {
                 window.gearAnimate.stop()
+                windowRectangle.enabled = true
             }
         }
     }
